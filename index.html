@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindEase – Academic Wellness Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,wght@0,300;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ============================================================
+       CRISIS OVERLAY – shown when self-harm keywords are detected
+  ============================================================ -->
+  <div id="crisisOverlay" class="crisis-overlay hidden" role="alert" aria-live="assertive">
+    <div class="crisis-card">
+      <div class="crisis-icon">🤍</div>
+      <h2>You're not alone.</h2>
+      <p>
+        I'm really sorry you're feeling this way. What you're going through sounds incredibly hard,
+        and it matters. Please don't face this alone.
+      </p>
+      <ul class="crisis-list">
+        <li>💬 Talk to a <strong>trusted friend or family member</strong> right now.</li>
+        <li>📞 Reach out to a <strong>local mental health helpline</strong> in your area.</li>
+        <li>🏫 Visit your <strong>college counseling centre</strong> – they're there for you.</li>
+      </ul>
+      <p class="crisis-note">
+        <em>iCall (India): 9152987821 &nbsp;|&nbsp; Vandrevala Foundation: 1860-2662-345 (24/7)</em>
+      </p>
+      <button id="crisisDismiss" onclick="dismissCrisis()">I'm safe — take me back</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN APP SHELL
+  ============================================================ -->
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-icon">🌿</span>
+        <span class="brand-name">MindEase</span>
+      </div>
+      <p class="brand-tagline">Your academic wellness companion</p>
+
+      <!-- Mood Check-in -->
+      <section class="panel" id="moodPanel">
+        <h3 class="panel-title">How are you feeling?</h3>
+        <div class="mood-grid">
+          <button class="mood-btn" data-mood="motivated"   onclick="setMood('motivated')">😄<span>Motivated</span></button>
+          <button class="mood-btn" data-mood="okay"        onclick="setMood('okay')">😐<span>Okay</span></button>
+          <button class="mood-btn" data-mood="stressed"    onclick="setMood('stressed')">😓<span>Stressed</span></button>
+          <button class="mood-btn" data-mood="burnout"     onclick="setMood('burnout')">😣<span>Burnt Out</span></button>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="panel">
+        <h3 class="panel-title">Quick Actions</h3>
+        <div class="action-list">
+          <button class="action-btn" onclick="quickAction('focus')">⏱ Focus Sprint (5 min)</button>
+          <button class="action-btn" onclick="quickAction('breathe')">🌬 Breathing Exercise</button>
+          <button class="action-btn" onclick="quickAction('ground')">🌱 Grounding Technique</button>
+          <button class="action-btn" onclick="quickAction('motivate')">⚡ Motivation Boost</button>
+        </div>
+      </section>
+
+      <!-- Session Insight -->
+      <section class="panel" id="insightPanel" style="display:none;">
+        <h3 class="panel-title">Session Insight</h3>
+        <p id="insightText" class="insight-text"></p>
+      </section>
+
+      <div class="sidebar-footer">
+        <p>Not a therapist. For emergencies, call a professional.</p>
+      </div>
+    </aside>
+
+    <!-- Chat Area -->
+    <main class="chat-area">
+      <header class="chat-header">
+        <div class="header-left">
+          <div class="avatar">🌿</div>
+          <div>
+            <strong>MindEase</strong>
+            <span class="status-dot"></span><small> Online</small>
+          </div>
+        </div>
+        <button class="insight-btn" onclick="showInsight()">📊 Session Insight</button>
+      </header>
+
+      <!-- Message Feed -->
+      <div class="messages" id="messages" role="log" aria-live="polite">
+        <!-- Welcome message injected by JS -->
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="typing-indicator hidden" id="typingIndicator">
+        <span></span><span></span><span></span>
+      </div>
+
+      <!-- Input Row -->
+      <div class="input-row">
+        <textarea
+          id="userInput"
+          placeholder="Share what's on your mind…"
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+          aria-label="Type your message"
+        ></textarea>
+        <button class="send-btn" onclick="sendMessage()" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
