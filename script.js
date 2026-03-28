@@ -6,7 +6,7 @@
 // -----------------------------------------------
 // 🔑 CONFIG — REPLACE WITH YOUR GROQ API KEY
 // -----------------------------------------------
-const GROQ_API_KEY = "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";
+const GROQ_API_KEY = "GROQ_API";
 const GROQ_MODEL   = "llama3-8b-8192"; // or mixtral-8x7b-32768
 
 // -----------------------------------------------
